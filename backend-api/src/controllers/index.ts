@@ -1,13 +1,5 @@
-import { RequestHandler } from 'express';
+import * as health from './health';
 
-export const world: RequestHandler = async (req, res) => {
-    res.send('Hello world!');
-}
-
-export const healthCheck: RequestHandler = async (req, res) => {
-    try {
-        res.status(200).send();
-    } catch (err) {
-        res.status(503).send();
-    }
-}
+export {
+    health,
+};
