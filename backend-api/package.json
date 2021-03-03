@@ -4,6 +4,10 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
+    "db:setup": "npm run db:migrate:latest",
+    "db:migrate:make": "ts-node ./src/db/migration-make",
+    "db:migrate:latest": "ts-node ./src/db/migration-latest",
+    "db:migrate:rollback": "ts-node ./src/db/migration-rollback",
     "test": "jest",
     "start": "nodemon",
     "build": "tsc",
@@ -14,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "http-status-codes": "^2.1.4"
+    "http-status-codes": "^2.1.4",
+    "knex": "^0.21.19",
+    "pg": "^8.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
