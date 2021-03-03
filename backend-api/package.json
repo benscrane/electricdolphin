@@ -13,7 +13,8 @@
   "author": "ben crane",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "http-status-codes": "^2.1.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",

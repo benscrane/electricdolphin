@@ -1,9 +1,10 @@
 import { RequestHandler } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 export const healthCheck: RequestHandler = async (req, res) => {
   try {
-    res.status(200).send();
+    res.status(StatusCodes.OK).send();
   } catch (err) {
-    res.status(503).send();
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
   }
 };
