@@ -9,13 +9,12 @@ export const router = Router();
 
 router.get('/health', health.healthCheck);
 router.post('/login', AuthController.loginUser);
-router.post(
-    '/signup',
-    passport.authenticate('local', { session: false }),
-    async (req, res, next) => {
+router.post('/signup',
+    passport.authenticate('signup', { session: false }),
+    async (req, res) => {
         res.json({
             message: 'Signup successful',
             user: req.user,
-        });
+        })
     }
 );
