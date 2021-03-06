@@ -5,7 +5,7 @@ import { hashPassword } from '../services/AuthService';
 import bcrypt from 'bcrypt';
 
 export interface User {
-    id: string;
+    id?: string;
     email: string;
     password?: string;
 }
