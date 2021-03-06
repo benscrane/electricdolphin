@@ -1,10 +1,27 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import { router } from './routes';
+import { server as serverConfig } from './config';
+import { testDBConnection } from './db/knexfile';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import { jwtStrategy, loginStrategy, signupStrategy } from './utils/passport';
+
+passport.use('signup', signupStrategy);
+passport.use('login', loginStrategy);
+passport.use(jwtStrategy);
 
 const app: Application = express();
 
-app.use('/', router);
+app.use(bodyParser.json({}));
 
-app.listen(3000, () => {
+app.use(router);
+
+app.use((err: any, _: any, res: any) => {
+    res.status(err.status || 500);
+    res.json({ error: err});
+});
+
+app.listen(serverConfig.port, async () => {
   console.log('Server listening on port 3000');
+  await testDBConnection();
 });
