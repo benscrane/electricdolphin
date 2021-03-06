@@ -1,7 +1,7 @@
-import * as health from './health';
+import * as HealthController from './HealthController';
 import * as AuthController from './AuthController';
 
 export {
-    health,
+    HealthController,
     AuthController,
 };

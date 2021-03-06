@@ -1,5 +1,5 @@
 import 'jest';
-import * as health from '../../src/controllers/health';
+import * as health from '../../src/controllers/HealthController';
 import { mockRequest, mockResponse, mockNext } from '../testHelpers';
 
 describe('Module: health controllers', () => {
