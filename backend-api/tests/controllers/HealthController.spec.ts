@@ -1,5 +1,5 @@
 import 'jest';
-import * as health from '../../src/controllers/HealthController';
+import * as HealthController from '../../src/controllers/HealthController';
 import { mockRequest, mockResponse, mockNext } from '../testHelpers';
 
 describe('Module: health controllers', () => {
@@ -7,7 +7,7 @@ describe('Module: health controllers', () => {
     it('should respond with 200', async () => {
       const request = mockRequest();
       const response = mockResponse();
-      await health.healthCheck(request, response, mockNext);
+      await HealthController.healthCheck(request, response, mockNext);
       expect(response.status).toHaveBeenCalledWith(200);
       expect(response.send).toHaveBeenCalled();
     });
