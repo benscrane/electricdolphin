@@ -8,17 +8,19 @@ import passport from 'passport';
 export const router = Router();
 
 router.get('/health', health.healthCheck);
-router.post(
-    '/login',
-    passport.authenticate('login', { session: false }),
-    AuthController.loginUser,
-);
+router.post('/login', AuthController.loginUser);
 router.post('/signup',
     passport.authenticate('signup', { session: false }),
-    async (req, res) => {
+    AuthController.signupUser,
+);
+router.get(
+    '/profile',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {
         res.json({
-            message: 'Signup successful',
+            message: 'You made it to the secret route',
             user: req.user,
+            token: req.query.secret_token,
         })
     }
-);
+)
