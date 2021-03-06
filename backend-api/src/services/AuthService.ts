@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { knex } from '../utils/db';
 import { v4 as uuidv4 } from 'uuid';
 import { User } from '../models';
 import * as jwt from 'jsonwebtoken';
@@ -10,28 +9,23 @@ export const hashPassword = async (password: string): Promise<string> => {
     return hashedPassword;
 };
 
-export const createUser = async (email: string, password: string) => {
+export const createUser = async ({ email, password }: { email: string, password: string }): Promise<{ token: string }> => {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+        throw new Error('User already exists with that email');
+    }
+
     const hashedPassword = await hashPassword(password);
-    await checkDbForEmail(email);
-    const user: User.User = {
-        id: uuidv4(),
-        email,
-        password: hashedPassword,
-    };
-    let userId = await knex('user').insert(user, 'id');
+
+    const id = uuidv4();
+
+    const user = await User.create({ email, password: hashedPassword, id });
+
+    const token = createJwt(user);
     return {
-        email,
-        hashedPassword,
-        userId,
+        token,
     };
 };
-
-export const checkDbForEmail = async (email: string) => {
-    const rows = await knex('user').where({ email }).select('id');
-    if (rows.length > 0) {
-        throw new Error('Account already exists for that email');
-    }
-}
 
 export const loginUser = async ({ email, password}: { email: string, password: string}): Promise<{ token: string }> => {
     const user = await User.findOne({ email });

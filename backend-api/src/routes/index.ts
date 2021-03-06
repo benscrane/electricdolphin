@@ -9,10 +9,7 @@ export const router = Router();
 
 router.get('/health', HealthController.healthCheck);
 router.post('/login', AuthController.loginUser);
-router.post('/signup',
-    passport.authenticate('signup', { session: false }),
-    AuthController.signupUser,
-);
+router.post('/signup', AuthController.signupUser);
 router.get(
     '/profile',
     passport.authenticate('jwt', { session: false }),

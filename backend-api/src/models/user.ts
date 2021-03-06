@@ -32,6 +32,11 @@ export const find = async (options: FindOptions): Promise<User | User[]> => {
         : users;
 };
 
+export const create = async (options: { email: string, password: string, id: string }): Promise<User> => {
+    const dbOutput = await knex('user').insert(options, ['id', 'email']);
+    return formatUser(dbOutput);
+};
+
 export const formatUser = (input: any): User => {
     return {
         id: input.id,

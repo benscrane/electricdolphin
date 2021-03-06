@@ -20,8 +20,18 @@ export const loginUser: RequestHandler = async (req, res) => {
 };
 
 export const signupUser: RequestHandler = async (req, res) => {
-    res.json({
-        message: 'Signup successful',
-        user: req.user,
-    });
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            throw new Error('Email and password are required');
+        }
+
+        const { token } = await AuthService.createUser({ email, password });
+
+        res.json({ token });
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json({
+            message: error.message,
+        });
+    }
 };
