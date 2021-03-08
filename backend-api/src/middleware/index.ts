@@ -1,6 +1,7 @@
 import { RequestHandler, Request } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
+import { set } from 'lodash';
 
 export const verifyJwt: RequestHandler = async (req, res, next) => {
 
@@ -8,7 +9,7 @@ export const verifyJwt: RequestHandler = async (req, res, next) => {
         const token = extractJwt(req);
 
         const validToken = await jwt.verify(token, 'TOP_SECRET');
-        console.log(validToken);
+        set(req, 'user', validToken);
         next();
     } catch (error) {
         res.status(StatusCodes.UNAUTHORIZED).json({
