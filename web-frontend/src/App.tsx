@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { setWindowTitle } from './utils';
 
-function App() {
+const App = () =>  {
+  setWindowTitle('Digital Elephant');
+
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +24,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
