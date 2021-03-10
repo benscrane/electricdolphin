@@ -1,6 +1,7 @@
 import React from 'react';
 import { setWindowTitle } from './utils';
 import { Grommet } from 'grommet';
+import { NavBar } from './core/Navigation';
 
 const App = () =>  {
   setWindowTitle('Digital Elephant');
@@ -16,6 +17,7 @@ const App = () =>  {
 
   return (
     <Grommet theme={theme}>
+      <NavBar />
       <h2>Test</h2>
     </Grommet>
   );
