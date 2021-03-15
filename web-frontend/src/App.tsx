@@ -2,23 +2,17 @@ import React from 'react';
 import { setWindowTitle } from './utils';
 import { Grommet } from 'grommet';
 import { NavBar } from './core/Navigation';
+import { Theme } from './core/Theme';
 
 const App = () =>  {
   setWindowTitle('Digital Elephant');
 
-  const theme = {
-    global: {
-      font: {
-        size: '14px',
-        height: '20px',
-      }
-    }
-  }
-
   return (
-    <Grommet theme={theme}>
+    <Grommet>
+      <Theme>
       <NavBar />
       <h2>Test</h2>
+      </Theme>
     </Grommet>
   );
 };
